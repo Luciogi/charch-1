@@ -1,7 +1,6 @@
 #!/system/bin/sh
 # Written by Draco (tytydraco @ GitHub)
 
-
 ui_print ""
 ui_print " --- ChArch Magisk Module ---"
 ui_print ""
