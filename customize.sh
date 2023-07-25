@@ -1,7 +1,6 @@
 #!/system/bin/sh
 # Written by Draco (tytydraco @ GitHub)
 
-set -e
 
 ui_print ""
 ui_print " --- ChArch Magisk Module ---"
@@ -22,7 +21,8 @@ do
 	sed -i '3iexport PATH="/sbin/.magisk/busybox:\$PATH"' "$MODPATH/system/bin/$bin"
 done
 patch "$MODPATH/system/bin/charch" "$MODPATH/patch/0001-android-remount-root-suid-exec.patch"
-
+ui_print " * Patching for /dev/pts ..."
+sed -i -e 's#safe_mount_file /etc/resolv.conf#safe_mount_file /etc/resolv.conf\n\tsafe_mount_dir /dev/pts dev/pts\n#' "$MODPATH/system/bin/charch"
 
 ui_print " * Setting executable permissions..."
 set_perm_recursive "$MODPATH/system/bin" root root 0777 0755
